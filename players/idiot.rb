@@ -1,5 +1,5 @@
 
-require './player_base'
+require './../player_base'
 
 class Idiot < PlayerBase
   def make_move

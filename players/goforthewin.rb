@@ -1,5 +1,5 @@
 
-require './player_base'
+require './../player_base'
 
 class GoForTheWin < PlayerBase
 
