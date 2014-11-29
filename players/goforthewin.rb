@@ -1,5 +1,5 @@
 
-require './../player_base'
+require '../player_base.rb'
 
 class GoForTheWin < GameBase
 
@@ -14,7 +14,7 @@ class GoForTheWin < GameBase
   end
 
   def make_move
-    0..8.each do |p|
+    (0..8).each do |p|
       self.set_loc(p)
       return if winning_board?
       self.set_loc(p, nil)

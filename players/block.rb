@@ -1,10 +1,10 @@
 
-require './goforthewin'
+require 'goforthewin.rb'
 
 class Block < GoForTheWin
 
   def make_move
-    0..8.each do |pos|
+    (0..8).each do |pos|
       set_loc(pos, opponent_xo)
       if winning_board?
         set_loc(pos)
