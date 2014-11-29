@@ -1,0 +1,8 @@
+source 'https://rubygems.org'
+ruby '2.1.3'
+gem 'sinatra'
+gem 'json'
+gem 'httparty'
+gem 'htmlentities'
+gem 'state_machine'
+gem 'comboclient', :git => 'https://github.com/tekacs/combo-client-ruby'
