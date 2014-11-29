@@ -1,7 +1,5 @@
 require 'state_machine'
 
-require 'comboclient'
-
 class BoardPos
   attr_reader :size
   
@@ -19,14 +17,24 @@ class BoardPos
 end
 
 class PlayerBase
-  attr_reader :id
+  attr_reader :id, :name
+  
+  def initialize(id, name)
+    @id = id
+    @name = name
+  end
+end
+
+class GameBase
   attr_accessor :board
   
-  def initialize(id, is_x, size=3)
-    @id = id
+  def initialize(size=3, is_x)
+    @is_x = is_x
+    @my_char = @is_x ? :x : :o
+    @their_char = @is_x ? :o : :x
+    
     @pos = BoardPos.new(size)
     @board = Array.new(size*size)
-    @is_x = is_x
   end
   
   def is_x?
@@ -37,13 +45,24 @@ class PlayerBase
     @board[@pos.to_loc(x, y)]
   end
   
-  def set(x, y, v)
-    @board[@pos.to_loc(x, y)] = v
+  def set(x, y, v=nil)
+    @board[@pos.to_loc(x, y)] ||= v || @my_char
+  end
+  
+  def get_loc(loc)
+    @board[loc]
+  end
+  
+  def set_loc(loc, v=nil)
+    @board[loc] ||= v || @my_char
   end
   
   def opponent_move(move)
-    loc = @pos.to_loc(move['x'], move['y'])
-    @board[loc] ||= @is_x ? :o : :x
+    set(move['x'], move['y'], @their_char)
+  end
+  
+  def new_game
+    puts 'Starting new game.'
   end
   
   def make_move(meta)
